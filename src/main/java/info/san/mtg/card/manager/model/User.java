@@ -20,13 +20,13 @@ import lombok.Setter;
 public class User {
 	
 	@Id
-	@Column(name = "uuid")
+	@Column(name = "uuid", nullable = false, length = 36)
 	private String uuid = UUID.randomUUID().toString();
 	
-	@Column(name = "login")
+	@Column(name = "login", nullable = false, length = 50)
 	private String login;
 	
-	@Column(name = "name")
+	@Column(name = "name", nullable = false, length = 150)
 	private String name;
 
 	@ManyToMany

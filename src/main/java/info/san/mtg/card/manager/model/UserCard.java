@@ -18,22 +18,22 @@ import lombok.Setter;
 public class UserCard {
 	
 	@Id
-	@Column(name = "uuid")
+	@Column(name = "uuid", length = 36, nullable = false)
 	private String uuid = UUID.randomUUID().toString();
 	
-	@Column(name = "qte")
+	@Column(name = "qte", nullable = false)
 	private int qte;
 	
-	@Column(name = "qteFoil")
+	@Column(name = "qteFoil", nullable = false)
 	private int qteFoil;
 	
-	@Column(name = "condition")
+	@Column(name = "condition", nullable = false, length = 4)
 	private ConditionEnum condition;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Cards card;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private User user;
 
 }
