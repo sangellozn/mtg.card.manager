@@ -1,6 +1,6 @@
 package info.san.mtg.card.manager.model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Sets {
+public class Sets implements Serializable {
 
 	@Id
 	@Column(name = "code")
@@ -37,7 +37,7 @@ public class Sets {
 	private String parentCode;
 	
 	@Column(name = "releaseDate")
-	private LocalDate releaseDate;
+	private String releaseDate;
 	
 	@Column(name = "totalSetSize")
 	private int totalSetSize;

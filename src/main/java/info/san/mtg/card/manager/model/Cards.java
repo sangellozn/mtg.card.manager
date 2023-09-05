@@ -1,13 +1,13 @@
 package info.san.mtg.card.manager.model;
 
-import java.util.Set;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,14 +15,15 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Cards {
+@Table(name = "cards")
+public class Cards implements Serializable {
 	
 	@Id
 	@Column(name = "uuid")
 	private String uuid;
 	
-	@Column(name = "boderColor")
-	private String boderColor;
+	@Column(name = "borderColor")
+	private String borderColor;
 	
 	@Column(name = "colorIdentity")
 	private String colorIdentity;
@@ -84,8 +85,5 @@ public class Cards {
 	@ManyToOne
 	@JoinColumn(name = "setCode")
 	private Sets set;
-	
-	@OneToMany(mappedBy = "card")
-	private Set<CardForeignData> cardForeignDatas;
 	
 }

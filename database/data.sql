@@ -1,0 +1,1 @@
+INSERT INTO mcmUser (uuid, login, name) VALUES ('c90b5268-aa70-4637-9339-5271313766e5', 'neomenphys', 'Neomenphys');

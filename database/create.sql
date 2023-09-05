@@ -18,10 +18,9 @@ create table mcmUserCard (
 	uuid varchar(36) not null,
 	qte integer not null,
 	qteFoil integer not null,
-	condition varchar(4) not null,
+	cond varchar(4) not null,
 	cards_uuid varchar(36) not null,
 	mcmUser_uuid varchar(36) not null,
 	primary key (uuid),
-	foreign key (cards_uuid) references card(uuid),
 	foreign key (mcmUser_uuid) references mcmUser(uuid)
 );

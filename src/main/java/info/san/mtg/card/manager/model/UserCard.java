@@ -1,10 +1,12 @@
 package info.san.mtg.card.manager.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "mcmUserCard")
-public class UserCard {
+public class UserCard implements Serializable {
 	
 	@Id
 	@Column(name = "uuid", length = 36, nullable = false)
@@ -27,13 +29,15 @@ public class UserCard {
 	@Column(name = "qteFoil", nullable = false)
 	private int qteFoil;
 	
-	@Column(name = "condition", nullable = false, length = 4)
+	@Column(name = "cond", nullable = false, length = 4)
 	private ConditionEnum condition;
 	
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "cards_uuid")
 	private Cards card;
 	
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "mcmUser_uuid")
 	private User user;
 
 }
