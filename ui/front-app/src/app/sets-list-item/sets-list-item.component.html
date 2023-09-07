@@ -1,0 +1,6 @@
+<ul *ngFor="let set of items">
+    <li>
+        <a routerLink="sets/{{set.code}}" routerLinkActive="router-link-active">{{set.code}} - {{set.name}}</a>
+        <app-sets-list-item [items]="set.setsEnfants"></app-sets-list-item>
+    </li>
+</ul>

@@ -2,7 +2,6 @@ package info.san.mtg.card.manager.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +40,7 @@ public class SearchServiceImpl implements ISearchService {
 				.map(searchResultMapper::map)
 				.toList());
 		
-		result.addAll(cardsRepository.search(query, PageRequest.of(0, 20).withSort(Sort.by("label")))
+		result.addAll(cardsRepository.search(query, PageRequest.of(0, 20))
 				.stream()
 				.map(searchResultMapper::map)
 				.toList());

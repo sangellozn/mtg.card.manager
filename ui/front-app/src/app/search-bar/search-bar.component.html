@@ -1,0 +1,13 @@
+<span class="p-fluid">
+    <p-autoComplete placeholder="Rechercher une carte ou un set" [suggestions]="searchResultItems" (completeMethod)="search($event)" field="label"
+        (onSelect)="onSelect($event)">
+        <ng-template let-item pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div *ngIf="item.type == 'SETS'">
+                    <div>{{item.id}} - {{item.label}}</div>
+                </div>
+                <div *ngIf="item.type == 'CARDS'">{{item.label}}</div>
+            </div>
+        </ng-template>
+    </p-autoComplete>
+</span>

@@ -1,0 +1,22 @@
+ul {
+    list-style: none;
+    padding-left: 15px;
+    li {
+        a {
+            display: flex;
+            padding: 0.5rem 0.5rem 0.5rem 1rem;
+            color: var(--surface-900);
+            border-radius: var(--border-radius);
+            transition: box-shadow .2s;
+            text-decoration: none;
+            &:hover {
+                background-color: var(--surface-hover);
+            }
+
+            &.router-link-active {
+                background-color: var(--highlight-bg);
+                color: var(--highlight-text-color);
+            }
+        }
+    }
+}

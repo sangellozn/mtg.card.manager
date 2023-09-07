@@ -14,13 +14,14 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 	@Query(value = """
 			select c.uuid as id,
 				'CARDS' as type,
-				cfd.name as label
+				c.number || ' - ' || cfd.name || ' (' || c.setCode || ')'  as label
 			from cards c 
 			inner join cardForeignData cfd on cfd.uuid = c.uuid 
 				and cfd."language" = 'French'
 			where cfd.name like lower('%' || :query || '%')
 				or cfd.flavorText like lower('%' || :query || '%')
 				or cfd."text" like lower('%' || :query || '%')
+			order by cfd.name
 			""", 
 			countQuery = """
 				select count(*)
