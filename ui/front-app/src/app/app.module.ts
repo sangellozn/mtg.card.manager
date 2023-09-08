@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ToastModule } from 'primeng/toast';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
@@ -46,7 +50,11 @@ import { NoSetSelectedComponent } from './no-set-selected/no-set-selected.compon
     ToastModule,
     ButtonModule,
     ProgressSpinnerModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    FormsModule,
+    TableModule,
+    InputTextModule,
+    InputNumberModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

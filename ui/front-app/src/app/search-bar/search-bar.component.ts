@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchResultItem } from '../beans/search-result-item';
 import { SearchService } from '../services/search.service';
+import { UserService } from '../services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -16,7 +18,10 @@ export class SearchBarComponent implements OnInit {
 
   searchResultItems: SearchResultItem[] = [];
 
-  constructor(private searchService: SearchService) {}
+  selectedResult: any;
+
+  constructor(private searchService: SearchService, private userService: UserService, 
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     
@@ -27,7 +32,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSelect(item: SearchResultItem): void {
-    console.log(item);
+    const uuid = this.route.snapshot.paramMap.get('id') || '';
+    this.userService.addItem(uuid, item).subscribe();
+    this.selectedResult = null;
   }
 
 }

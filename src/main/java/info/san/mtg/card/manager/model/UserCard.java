@@ -26,11 +26,11 @@ public class UserCard implements Serializable {
 	@Column(name = "qte", nullable = false)
 	private int qte;
 	
-	@Column(name = "qteFoil", nullable = false)
-	private int qteFoil;
+	@Column(name = "cond", nullable = false, length = 10)
+	private String condition;
 	
-	@Column(name = "cond", nullable = false, length = 4)
-	private ConditionEnum condition;
+	@Column(name = "card_type", nullable = false, length = 25)
+	private String type;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "cards_uuid")

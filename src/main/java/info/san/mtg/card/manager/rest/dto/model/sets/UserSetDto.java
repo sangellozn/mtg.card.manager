@@ -2,8 +2,9 @@ package info.san.mtg.card.manager.rest.dto.model.sets;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import info.san.mtg.card.manager.model.ConditionEnum;
+import info.san.mtg.card.manager.model.CardTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,11 @@ public class UserSetDto {
 
 	private SetDto set;
 	
-	private Collection<CardDto> cards = new ArrayList<>();
+	private List<CardDto> cards = new ArrayList<>();
+	
+	public void fillCardPossession() {
+		cards.forEach(CardDto::initCardPossession);
+	}
 	
 	@Getter
 	@Setter
@@ -65,17 +70,41 @@ public class UserSetDto {
 		
 		private CardForeignDataDto cardForeignData;
 		
+		public void initCardPossession() {
+			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.NORMAL));
+			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL));
+			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL_ETCHED));
+		}
+		
 		@Getter
 		@Setter
 		public static final class UserCardDto {
 			
-			private String uuid;
+			public UserCardDto(String cardUuid, CardTypeEnum type) {
+				this.cardUuid = cardUuid;
+				this.type = type.name();
+				this.typeLabel = type.getLabel();
+			}
 			
-			private int qte;
+			private String cardUuid;
 			
-			private int qteFoil;
+			private String typeLabel;
 			
-			private ConditionEnum condition;
+			private String type;
+			
+			private int qteM;
+			
+			private int qteNM;
+			
+			private int qteEX;
+			
+			private int qteGD;
+			
+			private int qteLP;
+			
+			private int qtePL;
+			
+			private int qtePoor;
 			
 		}
 		
@@ -93,6 +122,10 @@ public class UserSetDto {
 			
 			private String type;
 			
+		}
+		
+		public UserCardDto getUserCardByType(CardTypeEnum type) {
+			return possessions.stream().filter(p -> p.getType().equals(type.name())).findFirst().orElseThrow();
 		}
 		
 	}

@@ -1,1 +1,79 @@
-<p>sets-content works!</p>
+<div class="text-center">
+    <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+    <div *ngIf="!loading">
+        <h2>{{userSet.set.code}} - {{userSet.set.name}} ({{userSet.set.releaseDate | date:'dd/MM/yyyy'}})</h2>
+        <p-table [value]="userSet.cards" dataKey="uuid"
+            #cardsTable
+            [globalFilterFields]="['cardForeignData.name', 'cardForeignData.type', 'name', 'type']">
+            <ng-template pTemplate="caption">
+                <div class="flex">
+                    <button pButton label="Effacer le filtre" class="p-button-outlined" icon="pi pi-filter-slash" (click)="cardsTable.clear()"></button>
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="cardsTable.filterGlobal($any($event.target).value, 'contains')" placeholder="Rechercher" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5rem"></th>
+                    <th>Numéro</th>
+                    <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
+                    <th pSortableColumn="rarity">Rareté <p-sortIcon field="rarity"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-card let-expanded="expanded">
+                <tr>
+                    <td>
+                        <button type="button" pButton pRipple [pRowToggler]="card" class="p-button-text p-button-rounded p-button-plain" 
+                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    </td>
+                    <td>{{card.number}}</td>
+                    <td>{{card.cardForeignData?.name || card.name}}</td>
+                    <td>{{card.cardForeignData?.type || card.type}}</td>
+                    <td>{{card.rarity}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-card>
+                <tr>
+                    <td colspan="5">
+                        <div class="p-3">
+                            <p-table [value]="card.possessions">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th><span title="Mint">M</span></th>
+                                        <th><span title="Near Mint">NM</span></th>
+                                        <th><span title="Excellent">EX</span></th>
+                                        <th><span title="Good">GD</span></th>
+                                        <th><span title="Light Played">LP</span></th>
+                                        <th><span title="Played">PL</span></th>
+                                        <th><span title="Poor">POOR</span></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-possession>
+                                    <tr>
+                                        <td>{{possession.typeLabel}}</td>
+                                        <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteM" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                        <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteNM" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                        <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteEX" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                        <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteGD" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                        <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteLP" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                        <td><p-inputNumber [min]="0" [(ngModel)]="possession.qtePL" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                        <td><p-inputNumber [min]="0" [(ngModel)]="possession.qtePoor" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    Il y a {{userSet.cards ? userSet.cards.length : 0 }} cartes dans ce set.
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
