@@ -34,7 +34,7 @@ public class Application extends SpringBootServletInitializer {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName("forward:/index.html");
-                registry.addViewController("{path:(?:(?!api|\\.).)*}/**").setViewName("forward:/");
+                registry.addViewController("{path:(?:(?!api|\\.|!static).)*}/**").setViewName("forward:/");
             }
 
         };

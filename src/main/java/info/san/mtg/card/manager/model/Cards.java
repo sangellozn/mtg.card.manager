@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -85,5 +86,11 @@ public class Cards implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "setCode")
 	private Sets set;
+	
+	@OneToOne(mappedBy = "card")
+	private CardImagery cardImagery;
+	
+	@OneToOne(mappedBy = "card")
+	private CardIdentifiers cardIdentifiers;
 	
 }

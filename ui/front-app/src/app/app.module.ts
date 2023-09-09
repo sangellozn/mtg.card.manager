@@ -28,6 +28,7 @@ import { SetsListComponent } from './sets-list/sets-list.component';
 import { SetsListItemComponent } from './sets-list-item/sets-list-item.component';
 import { SetsContentComponent } from './sets-content/sets-content.component';
 import { NoSetSelectedComponent } from './no-set-selected/no-set-selected.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NoSetSelectedComponent } from './no-set-selected/no-set-selected.compon
     SetsListComponent,
     SetsListItemComponent,
     SetsContentComponent,
-    NoSetSelectedComponent
+    NoSetSelectedComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserAnimationsModule,

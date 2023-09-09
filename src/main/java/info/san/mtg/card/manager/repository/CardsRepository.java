@@ -1,5 +1,7 @@
 package info.san.mtg.card.manager.repository;
 
+import java.util.Collection;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,5 +36,7 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 					""",
 			nativeQuery = true)
 	Page<SearchResultProjection> search(@Param("query") String query, Pageable page);
+	
+	Collection<Cards> findAllByCardImageryIsNull();
 	
 }

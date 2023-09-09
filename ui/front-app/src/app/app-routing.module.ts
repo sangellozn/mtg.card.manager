@@ -5,9 +5,11 @@ import { HomeComponent } from './home/home.component';
 import { UserCollectionComponent } from './user-collection/user-collection.component';
 import { SetsContentComponent } from './sets-content/sets-content.component';
 import { NoSetSelectedComponent } from './no-set-selected/no-set-selected.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 const routes: Routes = [
   { path: 'mcm', component: HomeComponent },
+  { path: 'mcm/admin', component: AdminHomeComponent}, 
   { path: 'mcm/:id', component: UserCollectionComponent,
     children: [
       { path: '', component: NoSetSelectedComponent},
