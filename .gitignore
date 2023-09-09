@@ -3,3 +3,5 @@
 /.project
 /.settings
 /mcm.sqlite
+/mtg.card.manager/src/main/webapp
+/src/main/webapp

@@ -2,8 +2,9 @@ import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular
 import { UserSet } from '../beans/user-set';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { UserCard } from '../beans/user-card';
+import { NotifyAddService } from '../services/notify-add.service';
 
 @Component({
   selector: 'app-sets-content',
@@ -16,7 +17,16 @@ export class SetsContentComponent implements OnInit {
 
   loading: boolean = true;
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
+  notifyAddSubscription: Subscription;
+
+  constructor(private userService: UserService, private router: Router, 
+    private route: ActivatedRoute, private notifyAddService: NotifyAddService) {
+      this.notifyAddSubscription = this.notifyAddService.getAsObservable().subscribe(item => {
+        if (item.type === 'CARDS' && this.userSet.cards.find(card => card.uuid === item.id)) {
+          this.load();
+        }
+      });
+  }
 
   ngOnInit(): void {
     this.load();
