@@ -1,7 +1,7 @@
 <div class="text-center">
     <p-progressSpinner *ngIf="loading"></p-progressSpinner>
     <div *ngIf="!loading">
-        <h2><i class="ss ss-{{userSet.set.code.toLowerCase()}}"></i> {{userSet.set.code}} - {{userSet.set.name}} ({{userSet.set.releaseDate | date:'dd/MM/yyyy'}})</h2>
+        <h2><i class="ss ss-{{userSet.set.code.toLowerCase()}}" title="{{userSet.set.code}}"></i> {{userSet.set.code}} - {{userSet.set.name}} ({{userSet.set.releaseDate | date:'dd/MM/yyyy'}})</h2>
         <p-table [value]="userSet.cards" dataKey="uuid"
             #cardsTable
             [globalFilterFields]="['cardForeignData.name', 'cardForeignData.type', 'name', 'type']">
@@ -21,7 +21,7 @@
                     <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
                     <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
                     <th pSortableColumn="rarity">Rareté <p-sortIcon field="rarity"></p-sortIcon></th>
-                    <th>Couleur/Mana</th>
+                    <th>Couleur / Mana</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-card let-expanded="expanded">
@@ -34,8 +34,22 @@
                     <td>{{card.cardForeignData?.name || card.name}}</td>
                     <td>{{card.cardForeignData?.type || card.type}}</td>
                     <td>{{getRarityLabel(card.rarity)}}</td>
-                    <td><img *ngIf="card.colorIdentity" src="assets/static/images/symboles/mana/{{card.colorIdentity}}.svg" width="25px">
-                        <span *ngIf="!card.colorIdentity">NA</span>&nbsp;/&nbsp;</td>
+                    <td>
+                        <div class="flex">
+                            <div *ngIf="card.colorIdentity">
+                                <img *ngFor="let color of card.colorIdentity.split(', ')" src="assets/static/images/symboles/mana/{{color}}.svg" width="22px" alt="{{color}}" title="{{color}}">
+                            </div>
+                            <div *ngIf="!card.colorIdentity">NA</div>
+                            <div>
+                                &nbsp;/&nbsp;
+                            </div>
+                            <div *ngIf="!card.manaCost">NA</div>
+                            <div *ngIf="card.manaCost">
+                                <img *ngFor="let mana of getManaCostArray(card)" src="assets/static/images/symboles/mana/{{mana}}.svg" width="22px" alt="{{mana}}" title="{{mana}}">
+                            </div>
+
+                        </div>
+                    </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="rowexpansion" let-card>

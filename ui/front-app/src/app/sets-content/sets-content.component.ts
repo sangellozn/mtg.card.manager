@@ -5,6 +5,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
 import { UserCard } from '../beans/user-card';
 import { NotifyAddService } from '../services/notify-add.service';
+import { Card } from '../beans/card';
 
 @Component({
   selector: 'app-sets-content',
@@ -50,6 +51,14 @@ export class SetsContentComponent implements OnInit {
       this.userSet = set;
       this.loading = false;
     });
+  }
+
+  getManaCostArray(card: Card): string[] | null {
+    if (card.manaCost) {
+      return card.manaCost.match(/\{[0-9A-Z]+\}/g);
+    }
+
+    return null;
   }
 
   getRarityLabel(label: string): string {
