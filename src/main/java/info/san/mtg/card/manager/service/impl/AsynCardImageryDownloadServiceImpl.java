@@ -97,7 +97,7 @@ public class AsynCardImageryDownloadServiceImpl implements IAsynCardImageryDownl
 				savedImageChannel.transferFrom(smallByteChannel, 0, Long.MAX_VALUE);
 			}
 
-			Thread.sleep(new Random().nextInt(150));
+			Thread.sleep(new Random().nextInt(150) + 75);
 
 		} catch (IOException | InterruptedException e) {
 			log.warn("Cannot save image for card uuid = {}", card.getUuid());

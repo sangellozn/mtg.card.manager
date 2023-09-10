@@ -45,3 +45,10 @@ create table cardsImagery (
 	card_uuid uuid varchar(36) not null,
 	primary key (uuid)
 );
+
+create table scriptHistory (
+	script_idx varchar(5) not null,
+	script_name varchar(150) not null,
+	createdon timestamp not null,
+	primary key (script_idx)
+);

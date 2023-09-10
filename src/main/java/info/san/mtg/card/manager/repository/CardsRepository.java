@@ -37,6 +37,8 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 			nativeQuery = true)
 	Page<SearchResultProjection> search(@Param("query") String query, Pageable page);
 	
+	Collection<Cards> findAllBySetCodeIn(Collection<String> setCodes);
+	
 	Collection<Cards> findAllByCardImageryIsNull();
 	
 }

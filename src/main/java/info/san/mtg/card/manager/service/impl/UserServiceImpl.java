@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -160,14 +160,12 @@ public class UserServiceImpl implements IUserService {
 			}
 		}
 		
-		result.getCards().removeIf(card -> !NumberUtils.isCreatable(card.getNumber()));
-		
 		for (CardForeignData cfd : cardForeignDataRepository.findAllByIdUuidInAndIdLanguage(set.getCards().stream().map(Cards::getUuid).toList(), "French")) {
 			result.getCardByUuid(cfd.getId().getUuid()).setCardForeignData(cardForeignDataMapper.map(cfd));
 		}
 		
 		Collections.sort(result.getCards(), (left, right) -> {
-			return Integer.valueOf(left.getNumber()).compareTo(Integer.valueOf(right.getNumber()));
+			return StringUtils.leftPad(left.getNumber(), 5, '0').compareTo(StringUtils.leftPad(right.getNumber(), 5, '0')); 
 		});
 		
 		return result;

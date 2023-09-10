@@ -5,3 +5,5 @@ create table cardsImagery (
 	card_uuid uuid varchar(36) not null,
 	primary key (uuid)
 );
+
+INSERT INTO scriptHistory (script_idx, script_name, createdon) VALUES ('001', 'card-imagery.sql', datetime());
