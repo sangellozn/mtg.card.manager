@@ -18,10 +18,13 @@ export class SetsListComponent implements OnInit, OnDestroy {
 
   notifyAddSubscription: Subscription;
 
+  userUuid: string = '';
+
   constructor(private userService: UserService, private route: ActivatedRoute, private notifyAddService: NotifyAddService) {
     this.notifyAddSubscription = this.notifyAddService.getAsObservable().subscribe(item => {
       this.loadSets();
     });
+    this.userUuid = this.route.snapshot.paramMap.get('id') || '';
   }
   ngOnDestroy(): void {
     this.notifyAddSubscription.unsubscribe();

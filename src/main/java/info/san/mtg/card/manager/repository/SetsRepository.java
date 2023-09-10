@@ -14,7 +14,8 @@ public interface SetsRepository extends JpaRepository<Sets, String> {
 	@Query(value = """
 			select code as id,
 				'SETS' as type,
-				name as label
+				name as label,
+				keyruneCode as keyruneCode
 			from sets
 			where name like lower('%' || :query || '%')
 				or code = :query

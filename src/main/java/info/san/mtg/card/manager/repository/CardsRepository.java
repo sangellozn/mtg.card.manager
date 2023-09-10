@@ -16,10 +16,12 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 	@Query(value = """
 			select c.uuid as id,
 				'CARDS' as type,
-				c.number || ' - ' || cfd.name || ' (' || c.setCode || ')'  as label
+				c.number || ' - ' || cfd.name || ' (' || c.setCode || ')'  as label,
+				ci.url_small as urlImage
 			from cards c 
 			inner join cardForeignData cfd on cfd.uuid = c.uuid 
 				and cfd."language" = 'French'
+			left join cardsImagery ci on ci.card_uuid = c.uuid
 			where cfd.name like lower('%' || :query || '%')
 				or cfd.flavorText like lower('%' || :query || '%')
 				or cfd."text" like lower('%' || :query || '%')

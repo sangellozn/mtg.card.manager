@@ -6,3 +6,5 @@
 /mtg.card.manager/src/main/webapp
 /src/main/webapp
 /ui/front-app/src/assets/static/images/cards
+/mcm.sqlite-shm
+/mcm.sqlite-wal

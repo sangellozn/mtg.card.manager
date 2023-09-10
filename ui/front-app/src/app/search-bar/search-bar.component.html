@@ -1,12 +1,16 @@
 <span class="p-fluid">
     <p-autoComplete placeholder="Rechercher une carte ou un set pour un ajout rapide" [suggestions]="searchResultItems" (completeMethod)="search($event)" field="label"
-        (onSelect)="onSelect($event)" [(ngModel)]="selectedResult">
+        (onSelect)="onSelect($event)" [(ngModel)]="selectedResult" [panelStyle]="{'min-height': '500px'}">
         <ng-template let-item pTemplate="item">
             <div class="flex align-items-center gap-2">
-                <div *ngIf="item.type == 'SETS'">
-                    <div>{{item.id}} - {{item.label}}</div>
+                <div *ngIf="item.type == 'SETS'"><i class="ss ss-{{item.keyruneCode.toLowerCase()}}"></i> {{item.id}} - {{item.label}}</div>
+                <div class="flex" *ngIf="item.type == 'CARDS'">
+                    <div *ngIf="item.urlImage"><img src="{{item.urlImage}}" width="125px" /></div>
+                    <div *ngIf="!item.urlImage"><img src="assets/static/images/cards/unknown.webp" width="125px" /></div>
+                    <div class="flex align-items-center pl-5">
+                        <span>{{item.label}}</span>
+                    </div>
                 </div>
-                <div *ngIf="item.type == 'CARDS'">{{item.label}}</div>
             </div>
         </ng-template>
     </p-autoComplete>

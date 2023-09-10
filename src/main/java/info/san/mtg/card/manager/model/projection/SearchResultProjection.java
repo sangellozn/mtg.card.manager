@@ -7,5 +7,9 @@ public interface SearchResultProjection {
 	String getType();
 	
 	String getLabel();
+	
+	String getKeyruneCode();
+	
+	String getUrlImage();
 
 }

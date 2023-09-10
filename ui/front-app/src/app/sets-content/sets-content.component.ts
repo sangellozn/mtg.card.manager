@@ -51,5 +51,25 @@ export class SetsContentComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  getRarityLabel(label: string): string {
+    if (label === 'uncommon') {
+      return 'Unco';
+    }
+
+    if (label === 'common') {
+      return 'Commune';
+    }
+
+    if (label === 'rare') {
+      return 'Rare';
+    }
+
+    if (label === 'mythic') {
+      return 'Mythique';
+    }
+
+    return label;
+  }
   
 }

@@ -70,10 +70,22 @@ public class UserSetDto {
 		
 		private CardForeignDataDto cardForeignData;
 		
+		private CardImageryDto cardImagery;
+		
 		public void initCardPossession() {
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.NORMAL));
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL));
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL_ETCHED));
+		}
+		
+		@Getter
+		@Setter
+		public static final class CardImageryDto {
+			
+			private String urlNormal;
+			
+			private String urlSmall;
+			
 		}
 		
 		@Getter

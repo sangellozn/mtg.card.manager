@@ -30,6 +30,10 @@ public class SearchResultDto {
 		
 		private String label;
 		
+		private String keyruneCode;
+		
+		private String urlImage;
+		
 	}
 	
 	public boolean addAll(Collection<SearchResultItemDto> items) {

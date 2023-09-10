@@ -19,6 +19,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TagModule } from 'primeng/tag';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
@@ -56,7 +57,8 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     FormsModule,
     TableModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    TagModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
