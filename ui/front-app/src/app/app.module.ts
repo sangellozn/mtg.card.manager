@@ -20,6 +20,9 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TagModule } from 'primeng/tag';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CardModule } from 'primeng/card';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
@@ -30,6 +33,7 @@ import { SetsListItemComponent } from './sets-list-item/sets-list-item.component
 import { SetsContentComponent } from './sets-content/sets-content.component';
 import { NoSetSelectedComponent } from './no-set-selected/no-set-selected.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { SetsContentGridComponent } from './sets-content-grid/sets-content-grid.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     SetsListItemComponent,
     SetsContentComponent,
     NoSetSelectedComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    SetsContentGridComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -58,7 +63,10 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     TableModule,
     InputTextModule,
     InputNumberModule,
-    TagModule
+    TagModule,
+    SelectButtonModule,
+    CardModule,
+    ProgressBarModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

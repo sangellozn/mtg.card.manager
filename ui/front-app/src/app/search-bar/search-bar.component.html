@@ -5,8 +5,8 @@
             <div class="flex align-items-center gap-2">
                 <div *ngIf="item.type == 'SETS'"><i class="ss ss-{{item.keyruneCode.toLowerCase()}}"></i> {{item.id}} - {{item.label}}</div>
                 <div class="flex" *ngIf="item.type == 'CARDS'">
-                    <div *ngIf="item.urlImage"><img src="{{item.urlImage}}" width="125px" /></div>
-                    <div *ngIf="!item.urlImage"><img src="assets/static/images/cards/unknown.webp" width="125px" /></div>
+                    <div *ngIf="item.urlImage"><img src="{{assetBaseUrl}}{{item.urlImage}}" width="125px" /></div>
+                    <div *ngIf="!item.urlImage"><img src="{{assetBaseUrl}}assets/static/images/cards/unknown.webp" width="125px" /></div>
                     <div class="flex align-items-center pl-5">
                         <span>{{item.label}}</span>
                     </div>

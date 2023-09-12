@@ -6,6 +6,7 @@ import { Subscription, filter } from 'rxjs';
 import { UserCard } from '../beans/user-card';
 import { NotifyAddService } from '../services/notify-add.service';
 import { Card } from '../beans/card';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sets-content',
@@ -19,6 +20,15 @@ export class SetsContentComponent implements OnInit {
   loading: boolean = true;
 
   notifyAddSubscription: Subscription;
+
+  assetBaseUrl: string = environment.assetBaseUrl;
+
+  displayOptions: any[] = [
+    { icon: 'pi pi-list', label: 'Liste', component: 'list' },
+    { icon: 'pi pi-table', label: 'Tableau', component: 'grid' }
+  ];
+
+  selectedDisplayOption: any = this.displayOptions[0];
 
   constructor(private userService: UserService, private router: Router, 
     private route: ActivatedRoute, private notifyAddService: NotifyAddService) {
@@ -51,6 +61,25 @@ export class SetsContentComponent implements OnInit {
       this.userSet = set;
       this.loading = false;
     });
+  }
+
+  getCardName(card: Card): string {
+    if (card.cardForeignData?.name) {
+      return card.cardForeignData.name;
+    }
+
+    return card.name;
+  }
+
+  getProgressValue(): string {
+    const val = this.userSet.cards.flatMap(card => card.possessions).reduce((acc, currentValue) => {
+      if (currentValue.qteEX > 0 || currentValue.qteGD > 0 || currentValue.qteLP > 0 || currentValue.qteM || currentValue.qteNM
+        || currentValue.qtePL > 0 || currentValue.qtePoor > 0) {
+        return acc + 1;
+      }
+      return acc;
+    } , 0) / this.userSet.cards.length;
+    return val.toFixed(2);
   }
 
   getManaCostArray(card: Card): string[] | null {

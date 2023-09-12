@@ -18,7 +18,7 @@ public interface SetsRepository extends JpaRepository<Sets, String> {
 				keyruneCode as keyruneCode
 			from sets
 			where name like lower('%' || :query || '%')
-				or code = :query
+				or code = upper(:query)
 			order by label
 			""", nativeQuery = true)
 	Collection<SearchResultProjection> search(@Param("query") String query);

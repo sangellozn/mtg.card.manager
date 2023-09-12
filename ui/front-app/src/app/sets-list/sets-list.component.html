@@ -1,5 +1,5 @@
-<h2><a routerLink="/mcm/{{userUuid}}" class="no-underline">Accueil</a></h2>
-<h2>Sets</h2>
+<h2><a routerLink="/mcm/{{userUuid}}" class="no-underline">Sets</a></h2>
 <p-progressSpinner *ngIf="loading"></p-progressSpinner>
 <p *ngIf="!loading && sets.length === 0">Aucun set</p>
 <app-sets-list-item [items]="sets"></app-sets-list-item>
+<h2><a routerLink="/mcm/{{userUuid}}/recherche-avancee" class="no-underline">Recherche Avancée</a></h2>

@@ -2,100 +2,117 @@
     <p-progressSpinner *ngIf="loading"></p-progressSpinner>
     <div *ngIf="!loading">
         <h2><i class="ss ss-{{userSet.set.code.toLowerCase()}}" title="{{userSet.set.code}}"></i> {{userSet.set.code}} - {{userSet.set.name}} ({{userSet.set.releaseDate | date:'dd/MM/yyyy'}})</h2>
-        <p-table [value]="userSet.cards" dataKey="uuid"
-            #cardsTable
-            [globalFilterFields]="['cardForeignData.name', 'cardForeignData.type', 'name', 'type']">
-            <ng-template pTemplate="caption">
-                <div class="flex">
-                    <button pButton label="Effacer le filtre" class="p-button-outlined" icon="pi pi-filter-slash" (click)="cardsTable.clear()"></button>
-                    <span class="p-input-icon-left ml-auto">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="cardsTable.filterGlobal($any($event.target).value, 'contains')" placeholder="Rechercher" />
-                    </span>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 5rem"></th>
-                    <th>Numéro</th>
-                    <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
-                    <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
-                    <th pSortableColumn="rarity">Rareté <p-sortIcon field="rarity"></p-sortIcon></th>
-                    <th>Couleur / Mana</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-card let-expanded="expanded">
-                <tr>
-                    <td>
-                        <button type="button" pButton pRipple [pRowToggler]="card" class="p-button-text p-button-rounded p-button-plain" 
-                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                    </td>
-                    <td>{{card.number}}</td>
-                    <td>{{card.cardForeignData?.name || card.name}}</td>
-                    <td>{{card.cardForeignData?.type || card.type}}</td>
-                    <td>{{getRarityLabel(card.rarity)}}</td>
-                    <td>
-                        <div class="flex">
-                            <div *ngIf="card.colorIdentity">
-                                <img *ngFor="let color of card.colorIdentity.split(', ')" src="assets/static/images/symboles/mana/{{color}}.svg" width="22px" alt="{{color}}" title="{{color}}">
-                            </div>
-                            <div *ngIf="!card.colorIdentity">NA</div>
-                            <div>
-                                &nbsp;/&nbsp;
-                            </div>
-                            <div *ngIf="!card.manaCost">NA</div>
-                            <div *ngIf="card.manaCost">
-                                <img *ngFor="let mana of getManaCostArray(card)" src="assets/static/images/symboles/mana/{{mana}}.svg" width="22px" alt="{{mana}}" title="{{mana}}">
-                            </div>
+        <div class="card flex justify-content-center mb-3">
+            <p-selectButton [options]="displayOptions" [(ngModel)]="selectedDisplayOption" optionLabel="icon">
+                <ng-template let-item pTemplate>
+                    <i [class]="item.icon"></i>
+                </ng-template>
+            </p-selectButton>
+        </div>
+        <div class="grid">
+            <div class="col-12 mb-2">
+                <p-progressBar [value]="getProgressValue()"></p-progressBar>
+            </div>
+        </div>
+        <div *ngIf="selectedDisplayOption.component === 'list'">
+            <p-table [value]="userSet.cards" dataKey="uuid"
+                #cardsTable
+                [globalFilterFields]="['cardForeignData.name', 'cardForeignData.type', 'name', 'type']">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <button pButton label="Effacer le filtre" class="p-button-outlined" icon="pi pi-filter-slash" (click)="cardsTable.clear()"></button>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="cardsTable.filterGlobal($any($event.target).value, 'contains')" placeholder="Rechercher" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 5rem"></th>
+                        <th>Numéro</th>
+                        <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
+                        <th pSortableColumn="rarity">Rareté <p-sortIcon field="rarity"></p-sortIcon></th>
+                        <th>Couleur / Mana</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-card let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="card" class="p-button-text p-button-rounded p-button-plain" 
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>{{card.number}}</td>
+                        <td>{{card.cardForeignData?.name || card.name}}</td>
+                        <td>{{card.cardForeignData?.type || card.type}}</td>
+                        <td>{{getRarityLabel(card.rarity)}}</td>
+                        <td>
+                            <div class="flex">
+                                <div *ngIf="card.colorIdentity">
+                                    <img *ngFor="let color of card.colorIdentity.split(', ')" src="{{assetBaseUrl}}assets/static/images/symboles/mana/{{color}}.svg" width="22px" alt="{{color}}" title="{{color}}">
+                                </div>
+                                <div *ngIf="!card.colorIdentity">NA</div>
+                                <div>
+                                    &nbsp;/&nbsp;
+                                </div>
+                                <div *ngIf="!card.manaCost">NA</div>
+                                <div *ngIf="card.manaCost">
+                                    <img *ngFor="let mana of getManaCostArray(card)" src="{{assetBaseUrl}}assets/static/images/symboles/mana/{{mana}}.svg" width="22px" alt="{{mana}}" title="{{mana}}">
+                                </div>
 
-                        </div>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="rowexpansion" let-card>
-                <tr>
-                    <td colspan="6">
-                        <div class="p-3 grid">
-                            <div class="flex col-2 align-items-center">
-                                <img src="{{card.cardImagery.urlSmall}}" alt="{{card.cardForeignData?.name || card.name}}" title="{{card.cardForeignData?.name || card.name}}" />
                             </div>
-                            <div class="col-10">
-                                <p-table [value]="card.possessions">
-                                    <ng-template pTemplate="header">
-                                        <tr>
-                                            <th>Type</th>
-                                            <th class="text-center"><span title="Mint"><p-tag value="M" severity="success"></p-tag></span></th>
-                                            <th class="text-center"><span title="Near Mint"><p-tag value="NM" severity="success"></p-tag></span></th>
-                                            <th class="text-center"><span title="Excellent"><p-tag value="EX"></p-tag></span></th>
-                                            <th class="text-center"><span title="Good"><p-tag value="GD"></p-tag></span></th>
-                                            <th class="text-center"><span title="Light Played"><p-tag value="LP" severity="warning"></p-tag></span></th>
-                                            <th class="text-center"><span title="Played"><p-tag value="PL" severity="warning"></p-tag></span></th>
-                                            <th class="text-center"><span title="Poor"><p-tag value="POOR" severity="danger"></p-tag></span></th>
-                                        </tr>
-                                    </ng-template>
-                                    <ng-template pTemplate="body" let-possession>
-                                        <tr>
-                                            <td>{{possession.typeLabel}}</td>
-                                            <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteM" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
-                                            <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteNM" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
-                                            <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteEX" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
-                                            <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteGD" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
-                                            <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteLP" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
-                                            <td><p-inputNumber [min]="0" [(ngModel)]="possession.qtePL" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
-                                            <td><p-inputNumber [min]="0" [(ngModel)]="possession.qtePoor" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
-                                        </tr>
-                                    </ng-template>
-                                </p-table>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-card>
+                    <tr>
+                        <td colspan="6">
+                            <div class="p-3 grid">
+                                <div class="flex col-2 align-items-center">
+                                    <img src="{{assetBaseUrl}}{{card.cardImagery.urlSmall}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" />
+                                </div>
+                                <div class="col-10">
+                                    <p-table [value]="card.possessions">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Type</th>
+                                                <th class="text-center"><span title="Mint"><p-tag value="M" severity="success"></p-tag></span></th>
+                                                <th class="text-center"><span title="Near Mint"><p-tag value="NM" severity="success"></p-tag></span></th>
+                                                <th class="text-center"><span title="Excellent"><p-tag value="EX"></p-tag></span></th>
+                                                <th class="text-center"><span title="Good"><p-tag value="GD"></p-tag></span></th>
+                                                <th class="text-center"><span title="Light Played"><p-tag value="LP" severity="warning"></p-tag></span></th>
+                                                <th class="text-center"><span title="Played"><p-tag value="PL" severity="warning"></p-tag></span></th>
+                                                <th class="text-center"><span title="Poor"><p-tag value="POOR" severity="danger"></p-tag></span></th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-possession>
+                                            <tr>
+                                                <td>{{possession.typeLabel}}</td>
+                                                <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteM" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                                <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteNM" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                                <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteEX" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                                <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteGD" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                                <td><p-inputNumber [min]="0" [(ngModel)]="possession.qteLP" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                                <td><p-inputNumber [min]="0" [(ngModel)]="possession.qtePL" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                                <td><p-inputNumber [min]="0" [(ngModel)]="possession.qtePoor" inputStyleClass="w-4" (onBlur)="onBlur(possession)"> </p-inputNumber></td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="summary">
-                <div class="flex align-items-center justify-content-between">
-                    Il y a {{userSet.cards ? userSet.cards.length : 0 }} cartes dans ce set.
-                </div>
-            </ng-template>
-        </p-table>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                        Il y a {{userSet.cards ? userSet.cards.length : 0 }} cartes dans ce set.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+        <div *ngIf="selectedDisplayOption.component === 'grid'">
+            <app-sets-content-grid [cards]="userSet.cards"></app-sets-content-grid>
+        </div>
     </div>
 </div>

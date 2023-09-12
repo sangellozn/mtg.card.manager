@@ -6,4 +6,11 @@ create table cardsImagery (
 	primary key (uuid)
 );
 
+create table scriptHistory (
+	script_idx varchar(5) not null,
+	script_name varchar(150) not null,
+	createdon timestamp not null,
+	primary key (script_idx)
+);
+
 INSERT INTO scriptHistory (script_idx, script_name, createdon) VALUES ('001', 'card-imagery.sql', datetime());

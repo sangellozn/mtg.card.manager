@@ -1,0 +1,18 @@
+<div class="grid">
+    <div class="col-3" *ngFor="let card of cards">
+        <p-card>
+            <ng-template pTemplate="header">
+                <h3 class="mb-0 mt-0 pt-3 pb-1 pl-3 pr-3" style="min-height: 80px;">{{card.number}} - {{getCardName(card)}}</h3>
+            </ng-template>
+            <p class="m-0">
+                <img src="{{assetBaseUrl}}{{card.cardImagery.urlNormal}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" width="225px" loading="lazy"/>
+            </p>
+            <ng-template pTemplate="footer">
+                <ng-template ngFor let-possession let-size="count" [ngForOf]="getCardPossessions(card)">
+                    <p-tag severity="{{possession.severity}}" value="{{possession.type}} ({{possession.qty}})" styleClass="ml-1 mr-1"></p-tag>
+                </ng-template>
+                <span *ngIf="!getCardPossessions(card).length" class="p-tag-value">&nbsp;</span>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

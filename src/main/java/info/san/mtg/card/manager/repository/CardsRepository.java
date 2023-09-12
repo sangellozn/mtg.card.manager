@@ -23,8 +23,6 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 				and cfd."language" = 'French'
 			left join cardsImagery ci on ci.card_uuid = c.uuid
 			where cfd.name like lower('%' || :query || '%')
-				or cfd.flavorText like lower('%' || :query || '%')
-				or cfd."text" like lower('%' || :query || '%')
 			order by cfd.name
 			""", 
 			countQuery = """
@@ -33,8 +31,6 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 				inner join cardForeignData cfd on cfd.uuid = c.uuid 
 					and cfd."language" = 'French'
 				where cfd.name like lower('%' || :query || '%')
-					or cfd.flavorText like lower('%' || :query || '%')
-					or cfd."text" like lower('%' || :query || '%')
 					""",
 			nativeQuery = true)
 	Page<SearchResultProjection> search(@Param("query") String query, Pageable page);

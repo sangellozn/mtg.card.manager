@@ -3,6 +3,7 @@ import { SearchResultItem } from '../beans/search-result-item';
 import { SearchService } from '../services/search.service';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -19,6 +20,8 @@ export class SearchBarComponent implements OnInit {
   searchResultItems: SearchResultItem[] = [];
 
   selectedResult: any;
+
+  assetBaseUrl: string = environment.assetBaseUrl;
 
   constructor(private searchService: SearchService, private userService: UserService, 
     private route: ActivatedRoute) {}
