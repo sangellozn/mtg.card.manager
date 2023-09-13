@@ -1,1 +1,7 @@
+<h2>Accueil</h2>
 <p>Selectionner un set dans le menu à gauche ou rechercher un set/carte dans la barre de recherche pour l'ajouter !</p>
+<h2>Statistiques</h2>
+<ul>
+    <li *ngFor="let statsSet of stats.statsSet"><i class="ss ss-{{statsSet.code.toLowerCase()}}" title="{{statsSet.code}}"></i>&nbsp;
+        {{statsSet.code}} - {{statsSet.name}} ({{statsSet.possessedCards}} cartes sur {{statsSet.totalCards}} soit {{statsSet.possessedCards / statsSet.totalCards | number}} %)</li>
+</ul>

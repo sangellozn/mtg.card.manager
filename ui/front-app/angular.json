@@ -28,7 +28,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets/static/images/keyrune",
+              "src/assets/static/images/symboles"
             ],
             "styles": [
               "src/styles.scss",
@@ -60,7 +61,11 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "assets": [
+                "src/assets/static/images/keyrune",
+                "src/assets/static/images/symboles"
+              ]
             },
             "development": {
               "buildOptimizer": false,
