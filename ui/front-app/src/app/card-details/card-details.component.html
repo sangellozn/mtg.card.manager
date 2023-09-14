@@ -1,0 +1,15 @@
+<p-dialog [(visible)]="show" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" (onHide)="onHide()">
+    <ng-template pTemplate="header">
+        <div>
+            <span class="text-xl font-bold">{{card.number}} - {{getCardName(card)}}</span>
+        </div>
+    </ng-template>
+    <div class="flex">
+        <img src="{{assetBaseUrl}}{{card.cardImagery.urlNormal}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" width="350px">
+        <div class="ml-5 text-left">
+            <h3>{{getCardType(card)}}</h3>
+            <p *ngFor="let text of getCardText(card)">{{text}}</p>
+            <p class="font-italic" *ngFor="let flavorText of getCardFlavorText(card)">{{flavorText}}</p>
+        </div>
+    </div>
+</p-dialog>

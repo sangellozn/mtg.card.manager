@@ -5,7 +5,8 @@
                 <h3 class="mb-0 mt-0 pt-3 pb-1 pl-3 pr-3" style="min-height: 80px;">{{card.number}} - {{getCardName(card)}}</h3>
             </ng-template>
             <p class="m-0">
-                <img src="{{assetBaseUrl}}{{card.cardImagery.urlNormal}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" width="225px" loading="lazy"/>
+                <img src="{{assetBaseUrl}}{{card.cardImagery.urlNormal}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" width="225px" 
+                    loading="lazy" (click)="showCardDetail(card)"/>
             </p>
             <ng-template pTemplate="footer">
                 <ng-template ngFor let-possession let-size="count" [ngForOf]="getCardPossessions(card)">
@@ -15,4 +16,5 @@
             </ng-template>
         </p-card>
     </div>
+    <app-card-details [card]="selectedCard" [show]="showDetail" (onClose)="onCloseCardDetail()"></app-card-details>
 </div>

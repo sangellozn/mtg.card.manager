@@ -21,8 +21,6 @@ export class SetsContentComponent implements OnInit {
 
   notifyAddSubscription: Subscription;
 
-  assetBaseUrl: string = environment.assetBaseUrl;
-
   displayOptions: any[] = [
     { icon: 'pi pi-list', label: 'Liste', component: 'list' },
     { icon: 'pi pi-table', label: 'Tableau', component: 'grid' }
@@ -49,11 +47,6 @@ export class SetsContentComponent implements OnInit {
     });
   }
 
-  onBlur(userCard: UserCard): void {
-    const uuid = this.route.snapshot.parent?.paramMap.get('id') || '';
-    this.userService.updateUserCardInfo(uuid, userCard).subscribe();
-  }
-
   private load() {
     const uuid = this.route.snapshot.parent?.paramMap.get('id') || '';
     const code = this.route.snapshot.paramMap.get('code') || '';
@@ -63,51 +56,16 @@ export class SetsContentComponent implements OnInit {
     });
   }
 
-  getCardName(card: Card): string {
-    if (card.cardForeignData?.name) {
-      return card.cardForeignData.name;
-    }
-
-    return card.name;
-  }
-
   getProgressValue(): string {
     const val = this.userSet.cards.flatMap(card => card.possessions).reduce((acc, currentValue) => {
-      if (currentValue.qteEX > 0 || currentValue.qteGD > 0 || currentValue.qteLP > 0 || currentValue.qteM || currentValue.qteNM
+      if (currentValue.qteEX > 0 || currentValue.qteGD > 0 || currentValue.qteLP > 0 || currentValue.qteM > 0 || currentValue.qteNM > 0
         || currentValue.qtePL > 0 || currentValue.qtePoor > 0) {
         return acc + 1;
       }
       return acc;
-    } , 0) / this.userSet.cards.length;
+    } , 0) / this.userSet.cards.length * 100;
+    
     return val.toFixed(2);
-  }
-
-  getManaCostArray(card: Card): string[] | null {
-    if (card.manaCost) {
-      return card.manaCost.match(/\{[0-9A-Z]+\}/g);
-    }
-
-    return null;
-  }
-
-  getRarityLabel(label: string): string {
-    if (label === 'uncommon') {
-      return 'Unco';
-    }
-
-    if (label === 'common') {
-      return 'Commune';
-    }
-
-    if (label === 'rare') {
-      return 'Rare';
-    }
-
-    if (label === 'mythic') {
-      return 'Mythique';
-    }
-
-    return label;
   }
   
 }

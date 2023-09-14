@@ -10,7 +10,7 @@ export class Card {
     colors: string;
     finishes: string;
     flavorName: string;
-    flavorText: string;
+    flavorText: string = '';
     hasFoil: boolean;
     hasNonFoil: boolean;
     language: string;
@@ -22,11 +22,11 @@ export class Card {
     originalText: string;
     originalType: string;
     rarity: string;
-    text: string;
-    type: string;
-    types: string;
+    text: string = '';
+    type: string = '';
+    types: string = '';
     possessions : UserCard[];
-    cardForeignData: CardForeignData;
-    cardImagery: CardImagery;
+    cardForeignData: CardForeignData = new CardForeignData;
+    cardImagery: CardImagery = new CardImagery;
 
 }

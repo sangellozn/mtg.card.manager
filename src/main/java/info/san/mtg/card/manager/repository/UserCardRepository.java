@@ -37,7 +37,7 @@ public interface UserCardRepository extends JpaRepository<UserCard, String> {
 			select mus.sets_code as code,
 				s.name as setName,
 				s.totalSetSize as totalCards,
-				sum(muc.qte) as possessedCards
+				sum(case when muc.qte > 0 then 1 else 0 end) as possessedCards
 			from mcmUser_sets mus
 			inner join "sets" s on s.code = mus.sets_code
 			inner join cards c on c.setCode = s.code 

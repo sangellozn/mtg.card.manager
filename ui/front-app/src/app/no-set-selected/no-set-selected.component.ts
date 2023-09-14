@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NoSetSelectedComponent implements OnInit {
 
-  stats: Stats;
+  stats: Stats = new Stats;
 
   constructor(private statsService: StatsService, private route: ActivatedRoute) { }
 

@@ -11,10 +11,24 @@ export class SetsContentGridComponent implements OnInit {
   
   @Input() cards: Card[] = [];
 
+  showDetail: boolean = false;
+
+  selectedCard: Card;
+
   assetBaseUrl: string = environment.assetBaseUrl;
 
   ngOnInit(): void {
     
+  }
+
+  showCardDetail(card: Card): void {
+    this.selectedCard = card;
+    this.showDetail = true;
+  }
+
+  onCloseCardDetail(): void {
+    this.selectedCard = new Card;
+    this.showDetail = false;
   }
 
   getCardPossessions(card : Card): any[] {
@@ -29,13 +43,13 @@ export class SetsContentGridComponent implements OnInit {
     ];
 
     for (let p of card.possessions) {
-      if (p.qteM > 0) { baseData[0].qty += 1; }
-      if (p.qteNM > 0) { baseData[1].qty += 1; }
-      if (p.qteEX > 0) { baseData[2].qty += 1; }
-      if (p.qteGD > 0) { baseData[3].qty += 1; }
-      if (p.qteLP > 0) { baseData[4].qty += 1; }
-      if (p.qtePL > 0) { baseData[5].qty += 1; }
-      if (p.qtePoor > 0) { baseData[6].qty += 1; }
+      baseData[0].qty += p.qteM;
+      baseData[1].qty += p.qteNM;
+      baseData[2].qty += p.qteEX;
+      baseData[3].qty += p.qteGD;
+      baseData[4].qty += p.qteLP;
+      baseData[5].qty += p.qtePL;
+      baseData[6].qty += p.qtePoor;
     }
 
     return baseData.filter(item => item.qty > 0);

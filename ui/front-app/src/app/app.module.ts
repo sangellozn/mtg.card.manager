@@ -23,6 +23,7 @@ import { TagModule } from 'primeng/tag';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { DialogModule } from 'primeng/dialog';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
@@ -34,6 +35,9 @@ import { SetsContentComponent } from './sets-content/sets-content.component';
 import { NoSetSelectedComponent } from './no-set-selected/no-set-selected.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { SetsContentGridComponent } from './sets-content-grid/sets-content-grid.component';
+import { CardDetailsComponent } from './card-details/card-details.component';
+import { SetsContentListComponent } from './sets-content-list/sets-content-list.component';
+import { RechercheAvanceeComponent } from './recherche-avancee/recherche-avancee.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,10 @@ import { SetsContentGridComponent } from './sets-content-grid/sets-content-grid.
     SetsContentComponent,
     NoSetSelectedComponent,
     AdminHomeComponent,
-    SetsContentGridComponent
+    SetsContentGridComponent,
+    CardDetailsComponent,
+    SetsContentListComponent,
+    RechercheAvanceeComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -66,7 +73,8 @@ import { SetsContentGridComponent } from './sets-content-grid/sets-content-grid.
     TagModule,
     SelectButtonModule,
     CardModule,
-    ProgressBarModule
+    ProgressBarModule,
+    DialogModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
