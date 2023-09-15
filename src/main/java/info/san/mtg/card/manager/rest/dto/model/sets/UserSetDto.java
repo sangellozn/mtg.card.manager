@@ -1,5 +1,7 @@
 package info.san.mtg.card.manager.rest.dto.model.sets;
 
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -72,10 +74,28 @@ public class UserSetDto {
 		
 		private CardImageryDto cardImagery;
 		
+		private CardPriceDto cardPrice;
+		
 		public void initCardPossession() {
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.NORMAL));
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL));
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL_ETCHED));
+		}
+		
+		@Getter
+		@Setter
+		public static final class CardPriceDto {
+			
+			private BigDecimal valEur;
+
+			private BigDecimal valEurFoil;
+			
+			private BigDecimal valUsd;
+
+			private BigDecimal valUsdFoil;
+			
+			private Instant lastUpdated;
+			
 		}
 		
 		@Getter

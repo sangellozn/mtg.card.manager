@@ -1,4 +1,4 @@
-<p-table [value]="cards" dataKey="uuid"
+<p-table [value]="userSet.cards" dataKey="uuid"
     #cardsTable
     [globalFilterFields]="['cardForeignData.name', 'cardForeignData.type', 'name', 'type']">
     <ng-template pTemplate="caption">
@@ -89,8 +89,8 @@
     </ng-template>
     <ng-template pTemplate="summary">
         <div class="flex align-items-center justify-content-between">
-            Il y a {{cards ? cards.length : 0 }} cartes dans ce set.
+            Il y a {{userSet.cards ? userSet.cards.length : 0 }} cartes dans ce set.
         </div>
     </ng-template>
 </p-table>
-<app-card-details [card]="selectedCard" [show]="showDetail" (onClose)="onCloseCardDetail()"></app-card-details>
+<app-card-details [set]="userSet.set" [card]="selectedCard" [show]="showDetail" (onClose)="onCloseCardDetail()"></app-card-details>

@@ -1,5 +1,5 @@
 <div class="grid">
-    <div class="col-3" *ngFor="let card of cards">
+    <div class="col-3" *ngFor="let card of userSet.cards">
         <p-card>
             <ng-template pTemplate="header">
                 <h3 class="mb-0 mt-0 pt-3 pb-1 pl-3 pr-3" style="min-height: 80px;">{{card.number}} - {{getCardName(card)}}</h3>
@@ -16,5 +16,5 @@
             </ng-template>
         </p-card>
     </div>
-    <app-card-details [card]="selectedCard" [show]="showDetail" (onClose)="onCloseCardDetail()"></app-card-details>
+    <app-card-details [set]="userSet.set" [card]="selectedCard" [show]="showDetail" (onClose)="onCloseCardDetail()"></app-card-details>
 </div>

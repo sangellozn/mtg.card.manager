@@ -4,6 +4,7 @@ import { UserCard } from '../beans/user-card';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { UserSet } from '../beans/user-set';
 
 @Component({
   selector: 'app-sets-content-list',
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SetsContentListComponent implements OnInit {
 
-  @Input() cards: Card[] = [];
+  @Input() userSet: UserSet = new UserSet;
 
   assetBaseUrl: string = environment.assetBaseUrl;
 

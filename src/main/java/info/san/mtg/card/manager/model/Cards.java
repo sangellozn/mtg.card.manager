@@ -93,4 +93,7 @@ public class Cards implements Serializable {
 	@OneToOne(mappedBy = "card")
 	private CardIdentifiers cardIdentifiers;
 	
+	@OneToOne(mappedBy = "card")
+	private CardPrice cardPrice;
+	
 }

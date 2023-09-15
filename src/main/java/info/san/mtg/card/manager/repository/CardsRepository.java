@@ -1,5 +1,6 @@
 package info.san.mtg.card.manager.repository;
 
+import java.time.Instant;
 import java.util.Collection;
 
 import org.springframework.data.domain.Page;
@@ -38,5 +39,18 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 	Collection<Cards> findAllBySetCodeIn(Collection<String> setCodes);
 	
 	Collection<Cards> findAllByCardImageryIsNull();
+	
+	@Query("""
+		Select c
+		From Cards c
+		Left Join c.cardPrice cp
+		Where (cp.lastUpdated <= :updatedBefore Or cp Is Null)
+			And c.set.code In (
+				Select us.code
+				From User u
+				Inner Join u.sets us
+			)
+			""")
+	Collection<Cards> findAllForPriceUpdate(@Param("updatedBefore") Instant updatedBefore);
 	
 }

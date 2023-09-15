@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from '../beans/card';
 import { environment } from 'src/environments/environment';
+import { UserSet } from '../beans/user-set';
 
 @Component({
   selector: 'app-sets-content-grid',
@@ -9,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SetsContentGridComponent implements OnInit {
   
-  @Input() cards: Card[] = [];
+  @Input() userSet: UserSet = new UserSet;
 
   showDetail: boolean = false;
 

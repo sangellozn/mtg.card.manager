@@ -1,5 +1,6 @@
 import { CardForeignData } from "./card-foreign-data";
 import { CardImagery } from "./card-imagery";
+import { CardPrices } from "./card-prices";
 import { UserCard } from "./user-card";
 
 export class Card {
@@ -28,5 +29,6 @@ export class Card {
     possessions : UserCard[];
     cardForeignData: CardForeignData = new CardForeignData;
     cardImagery: CardImagery = new CardImagery;
+    cardPrice: CardPrices = new CardPrices;
 
 }

@@ -15,10 +15,10 @@
             </div>
         </div>
         <div *ngIf="selectedDisplayOption.component === 'list'">
-            <app-sets-content-list [cards]="userSet.cards"></app-sets-content-list>
+            <app-sets-content-list [userSet]="userSet"></app-sets-content-list>
         </div>
         <div *ngIf="selectedDisplayOption.component === 'grid'">
-            <app-sets-content-grid [cards]="userSet.cards"></app-sets-content-grid>
+            <app-sets-content-grid [userSet]="userSet"></app-sets-content-grid>
         </div>
     </div>
 </div>

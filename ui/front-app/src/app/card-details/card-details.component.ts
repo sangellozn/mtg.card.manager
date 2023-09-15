@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Card } from '../beans/card';
 import { environment } from 'src/environments/environment';
+import { Sets } from '../beans/sets';
 
 @Component({
   selector: 'app-card-details',
@@ -10,6 +11,8 @@ import { environment } from 'src/environments/environment';
 export class CardDetailsComponent implements OnInit {
 
   @Input() card: Card;
+
+  @Input() set: Sets;
 
   @Input() show: boolean = false;
 
@@ -55,6 +58,14 @@ export class CardDetailsComponent implements OnInit {
     }
 
     return card.type;
+  }
+
+  getAsSlug(text: string): string {
+    return (text || '').replaceAll(' ', '-')
+      .replaceAll(':', '')
+      .replaceAll("'", '')
+      .replaceAll('+', '')
+      .replaceAll(',', '');
   }
 
 }
