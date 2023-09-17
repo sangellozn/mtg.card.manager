@@ -64,7 +64,7 @@ public class UpdateCardPriceSchedule implements IUpdateCardPriceSchedule {
 			
 			cardPriceRepository.save(cardPrice);
 			
-			Thread.sleep(100);
+			Thread.sleep(250);
 		}
 		
 		log.info("Mise à jour effectuée !");
