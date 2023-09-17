@@ -27,6 +27,7 @@ public class StatsServiceImpl implements IStatsService {
 			dto.setName(item.getSetName());
 			dto.setPossessedCards(item.getPossessedCards());
 			dto.setTotalCards(item.getTotalCards());
+			dto.setEstimatedValue(item.getEstimatedValue());
 			
 			return dto;
 		}).toList());

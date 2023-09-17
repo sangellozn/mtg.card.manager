@@ -2,6 +2,7 @@ package info.san.mtg.card.manager.service.impl;
 
 import java.util.Collection;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,7 @@ public class AdministrationServiceImpl implements IAdministrationService {
 		this.asynCardImageryDownloadService = asynCardImageryDownloadService;
 	}
 
+	@Async
 	@Override
 	@Transactional
 	public void updateCardImagery(boolean force, CardImagerySetsUpdateDto cardImagerySetsUpdateDto) {

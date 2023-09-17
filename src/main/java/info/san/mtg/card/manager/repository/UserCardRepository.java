@@ -37,13 +37,21 @@ public interface UserCardRepository extends JpaRepository<UserCard, String> {
 			select mus.sets_code as code,
 				s.name as setName,
 				s.totalSetSize as totalCards,
-				sum(case when muc.qte > 0 then 1 else 0 end) as possessedCards
+				sum(case when muc.qte > 0 then 1 else 0 end) as possessedCards,
+				sum(
+				case 
+					when muc.card_type = 'NORMAL' then muc.qte * coalesce(cp.val_eur, 0)
+					when muc.card_type = 'FOIL' then muc.qte * coalesce(cp.val_eur_foil, 0)
+					else 0
+				end) as estimatedValue
 			from mcmUser_sets mus
 			inner join "sets" s on s.code = mus.sets_code
 			inner join cards c on c.setCode = s.code 
 			inner join mcmUserCard muc on muc.cards_uuid = c.uuid 
+			inner join cardsPrices cp on cp.card_uuid = muc.cards_uuid
 			where mus.mcmUser_uuid = :userUuid
 			group by mus.sets_code, s.name, s.totalSetSize
+			order by setName
 			""", nativeQuery = true)
 	Collection<UserCardStatsProjection> findAllStatsByUserUuid(@Param("userUuid") String userUuid);
 	

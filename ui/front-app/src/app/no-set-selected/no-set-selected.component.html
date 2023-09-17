@@ -3,5 +3,6 @@
 <h2>Statistiques</h2>
 <ul>
     <li *ngFor="let statsSet of stats.statsSet"><i class="ss ss-{{statsSet.code.toLowerCase()}}" title="{{statsSet.code}}"></i>&nbsp;
-        {{statsSet.code}} - {{statsSet.name}} ({{statsSet.possessedCards}} cartes sur {{statsSet.totalCards}} soit {{statsSet.possessedCards / statsSet.totalCards * 100 | number}} %)</li>
+        {{statsSet.code}} - {{statsSet.name}} ({{statsSet.possessedCards}} cartes sur {{statsSet.totalCards}} soit {{statsSet.possessedCards / statsSet.totalCards * 100 | number}} %) - {{statsSet.estimatedValue}} €</li>
 </ul>
+<p>Estimation de la valeur de la collection : {{stats.totalEstimatedValue}} €</p>

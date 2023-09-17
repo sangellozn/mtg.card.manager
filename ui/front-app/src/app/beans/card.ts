@@ -1,6 +1,7 @@
 import { CardForeignData } from "./card-foreign-data";
 import { CardImagery } from "./card-imagery";
 import { CardPrices } from "./card-prices";
+import { CardUrls } from "./card-urls";
 import { UserCard } from "./user-card";
 
 export class Card {
@@ -30,5 +31,6 @@ export class Card {
     cardForeignData: CardForeignData = new CardForeignData;
     cardImagery: CardImagery = new CardImagery;
     cardPrice: CardPrices = new CardPrices;
+    cardPurchaseUrls: CardUrls = new CardUrls;
 
 }

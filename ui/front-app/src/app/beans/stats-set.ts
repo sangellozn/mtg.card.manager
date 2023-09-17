@@ -4,5 +4,6 @@ export class StatsSet {
     name: string;
     totalCards: number;
     possessedCards: number;
+    estimatedValue: number;
 
 }

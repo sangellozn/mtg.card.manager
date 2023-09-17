@@ -14,7 +14,9 @@ import info.san.mtg.card.manager.repository.CardPriceRepository;
 import info.san.mtg.card.manager.repository.CardsRepository;
 import info.san.mtg.card.manager.rest.client.IScryfallPriceApiClient;
 import info.san.mtg.card.manager.rest.client.dto.ScryfallCardDto;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class UpdateCardPriceSchedule implements IUpdateCardPriceSchedule {
 	
@@ -35,11 +37,11 @@ public class UpdateCardPriceSchedule implements IUpdateCardPriceSchedule {
 	@Transactional
 	@Scheduled(fixedDelay = 6 *  60 * 60 * 1000)
 	public void updatePrices() throws InterruptedException {
-		System.out.println("Mise à jour des prix des cartes...");
+		log.info("Mise à jour des prix des cartes...");
 		
 		Collection<Cards> cardsToUpdate = cardsRepository.findAllForPriceUpdate(Instant.now().minus(2, ChronoUnit.DAYS));
 		
-		System.out.println(cardsToUpdate.size() + " carte(s) à mettre à jour.");
+		log.info("{} carte(s) à mettre à jour.", cardsToUpdate.size());
 		
 		for (Cards card : cardsToUpdate) {
 			CardPrice cardPrice = card.getCardPrice();
@@ -65,8 +67,7 @@ public class UpdateCardPriceSchedule implements IUpdateCardPriceSchedule {
 			Thread.sleep(100);
 		}
 		
-		System.out.println("Mise à jour effectuée !");
-		
+		log.info("Mise à jour effectuée !");
 	}
 	
 }

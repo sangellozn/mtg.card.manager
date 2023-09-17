@@ -19,6 +19,8 @@ import lombok.Setter;
 @Table(name = "cards")
 public class Cards implements Serializable {
 	
+	private static final long serialVersionUID = 1969883027060441263L;
+
 	@Id
 	@Column(name = "uuid")
 	private String uuid;
@@ -95,5 +97,8 @@ public class Cards implements Serializable {
 	
 	@OneToOne(mappedBy = "card")
 	private CardPrice cardPrice;
+
+	@OneToOne(mappedBy = "card")
+	private CardPurchaseUrls cardPurchaseUrls;
 	
 }

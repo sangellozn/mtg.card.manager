@@ -3,7 +3,9 @@ package info.san.mtg.card.manager.service.impl;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -97,7 +99,9 @@ public class UserServiceImpl implements IUserService {
 	public Collection<SetDto> findAllSets(String userUuid) {
 		User user = userRepository.getReferenceById(userUuid);
 		
-		Map<String, SetDto> setsByCode = user.getSets().stream().collect(Collectors.toMap(Sets::getCode, setMapper::map));
+		Map<String, SetDto> setsByCode = user.getSets().stream()
+				.sorted(Comparator.comparing(Sets::getName))
+				.collect(Collectors.toMap(Sets::getCode, setMapper::map, (e, u) -> e, LinkedHashMap::new));
 		Set<String> toExclude = new HashSet<>();
 		
 		setsByCode.forEach((key, set) -> {

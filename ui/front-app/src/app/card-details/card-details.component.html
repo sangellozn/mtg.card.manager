@@ -11,7 +11,7 @@
             <p *ngFor="let text of getCardText(card)">{{text}}</p>
             <p class="font-italic" *ngFor="let flavorText of getCardFlavorText(card)">{{flavorText}}</p>
             <p>
-                <a href="https://www.cardmarket.com/fr/Magic/Products/Singles/{{getAsSlug(set.name)}}/{{getAsSlug(card.name)}}?sellerCountry=12&language=2&minCondition=2" target="_blank">Lien vers CardMarket</a>
+                <a href="{{card.cardPurchaseUrls.cardmarket}}" target="_blank">Lien vers CardMarket</a>
             </p>
             <h3>Derniers prix</h3>
             <p *ngIf="card.cardPrice?.valEur"><b>Normal : </b>{{card.cardPrice.valEur}} €</p>

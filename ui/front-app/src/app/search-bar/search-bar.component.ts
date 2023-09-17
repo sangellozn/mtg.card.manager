@@ -35,6 +35,10 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSelect(item: SearchResultItem): void {
+    this.selectedResult = null;
+  }
+
+  add(item: SearchResultItem): void {
     const uuid = this.route.snapshot.paramMap.get('id') || '';
     this.userService.addItem(uuid, item).subscribe();
     this.selectedResult = null;

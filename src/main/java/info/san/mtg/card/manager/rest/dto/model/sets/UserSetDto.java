@@ -76,10 +76,20 @@ public class UserSetDto {
 		
 		private CardPriceDto cardPrice;
 		
+		private CardPurchaseUrlsDto cardPurchaseUrls;
+		
 		public void initCardPossession() {
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.NORMAL));
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL));
 			this.possessions.add(new UserCardDto(this.uuid, CardTypeEnum.FOIL_ETCHED));
+		}
+		
+		@Getter
+		@Setter
+		public static final class CardPurchaseUrlsDto {
+			
+			private String cardmarket;
+			
 		}
 		
 		@Getter
