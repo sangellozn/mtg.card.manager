@@ -41,7 +41,7 @@ export class CardDetailsComponent implements OnInit {
       return card.cardForeignData.text?.split('\\n');
     }
 
-    return card.text.split('\\n');
+    return card.text?.split('\\n');
   }
 
   getCardFlavorText(card: Card): string[] {
@@ -49,7 +49,7 @@ export class CardDetailsComponent implements OnInit {
       return card.cardForeignData.flavorText?.split('\\n');
     }
 
-    return card.flavorText.split('\\n');
+    return card.flavorText?.split('\\n');
   }
 
   getCardType(card: Card) : string {

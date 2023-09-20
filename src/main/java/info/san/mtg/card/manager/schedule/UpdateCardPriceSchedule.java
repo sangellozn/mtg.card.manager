@@ -35,11 +35,11 @@ public class UpdateCardPriceSchedule implements IUpdateCardPriceSchedule {
 
 	@Override
 	@Transactional
-	@Scheduled(fixedDelay = 6 *  60 * 60 * 1000)
+	@Scheduled(cron = "0 0 2 * * *")
 	public void updatePrices() throws InterruptedException {
 		log.info("Mise à jour des prix des cartes...");
 		
-		Collection<Cards> cardsToUpdate = cardsRepository.findAllForPriceUpdate(Instant.now().minus(2, ChronoUnit.DAYS));
+		Collection<Cards> cardsToUpdate = cardsRepository.findAllForPriceUpdate(Instant.now().minus(1, ChronoUnit.DAYS));
 		
 		log.info("{} carte(s) à mettre à jour.", cardsToUpdate.size());
 		
