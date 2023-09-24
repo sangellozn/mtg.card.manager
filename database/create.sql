@@ -63,3 +63,11 @@ create table cardsPrices (
 	last_updated timestamp not null,
 	primary key (uuid)
 );
+
+create table pricesHistory (
+	setCode varchar(8) not null,
+	val_eur decimal(10,2),
+	val_usd decimal(10,2),
+	date_history date not null,
+	primary key (setCode, date_history)
+);

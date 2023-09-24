@@ -3,3 +3,7 @@ drop table if exists mcmUser_sets;
 drop table if exists mcmUser;
 drop table if exists mcmCondition;
 drop table if exists mcmCardType;
+drop table if exists cardsImagery;
+drop table if exists cardsPrices;
+drop table if exists pricesHistory;
+drop table if exists scriptHistory;
