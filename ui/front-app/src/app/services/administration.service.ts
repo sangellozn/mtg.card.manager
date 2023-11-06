@@ -13,6 +13,8 @@ export class AdministrationService extends AbstractAppService {
 
   private adminUrl = `${environment.baseUrl}/admin`;
 
+  private updateDatabaseUrl = `${environment.mcmDbUpdateBaseUrl}/admin/db/update`;
+
   constructor(http: HttpClient, messageService: MessageService) {
     super(http, messageService);
   }
@@ -20,6 +22,12 @@ export class AdministrationService extends AbstractAppService {
   updateCardImagery(data: CardImagerySetsUpdate): Observable<void> {
     return this.http.post<void>(`${this.adminUrl}/cards/update-imagery`, data).pipe(
       tap(() => this.messageService.add({ severity: 'success', summary: 'Demande réussie', detail: 'La mise à jour des images est en cours !' })),
+      catchError(this.throwError()));
+  }
+
+  updateDatabase(): Observable<void> {
+    return this.http.post<void>(this.updateDatabaseUrl, null).pipe(
+      tap(() => this.messageService.add({ severity: 'success', summary: 'Demande réussie', detail: 'La mise à jour de la base de données en cours !' })),
       catchError(this.throwError()));
   }
 

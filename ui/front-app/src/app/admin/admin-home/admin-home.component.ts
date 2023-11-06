@@ -20,4 +20,8 @@ export class AdminHomeComponent implements OnInit {
     this.administrationService.updateCardImagery(new CardImagerySetsUpdate).subscribe();
   }
 
+  updateDatabase(): void {
+    this.administrationService.updateDatabase().subscribe();
+  }
+
 }

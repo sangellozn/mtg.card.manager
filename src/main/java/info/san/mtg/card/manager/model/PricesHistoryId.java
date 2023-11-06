@@ -6,7 +6,10 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import lombok.EqualsAndHashCode;
+
 @Embeddable
+@EqualsAndHashCode
 public class PricesHistoryId implements Serializable {
 
 	private static final long serialVersionUID = 1484305705031696591L;

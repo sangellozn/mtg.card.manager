@@ -53,7 +53,10 @@
             <td colspan="6">
                 <div class="p-3 grid">
                     <div class="flex col-2 align-items-center">
-                        <img src="{{assetBaseUrl}}{{card.cardImagery.urlSmall}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" (click)="showCardDetail(card)" />
+                        <div>
+                            <img src="{{assetBaseUrl}}{{card.cardImagery.urlSmall}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" (click)="showCardDetail(card)" />
+                            <p class="text-center">{{card.cardPrice.valEur || 'N/A'}} € / {{card.cardPrice.valEurFoil || 'N/A'}} €</p>
+                        </div>
                     </div>
                     <div class="col-10">
                         <p-table [value]="card.possessions">
