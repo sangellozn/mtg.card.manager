@@ -8,3 +8,7 @@
 /ui/front-app/src/assets/static/images/cards
 /mcm.sqlite-shm
 /mcm.sqlite-wal
+/AllPrintings.sqlite
+/AllPrintings.sqlite-shm
+/AllPrintings.sqlite-wal
+/prod/mcm.sqlite

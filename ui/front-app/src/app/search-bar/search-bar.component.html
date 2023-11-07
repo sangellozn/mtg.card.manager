@@ -1,27 +1,42 @@
-<span class="p-fluid">
-    <p-autoComplete placeholder="Rechercher une carte ou un set pour un ajout rapide" [suggestions]="searchResultItems" (completeMethod)="search($event)" field="label"
-        (onSelect)="onSelect($event)" [(ngModel)]="selectedResult" [panelStyle]="{'min-height': '500px'}">
-        <ng-template let-item pTemplate="item">
-            <div class="flex align-items-center gap-2">
-                <div *ngIf="item.type == 'SETS'" class="flex align-items-center">
-                    <div class="mr-3">
-                        <p-button icon="pi pi-plus" styleClass="p-button-sm p-button-outlined p-button-rounded p-button-success" (onClick)="add(item)"></p-button>
-                    </div>
-                    <span><i class="ss ss-{{item.keyruneCode.toLowerCase()}}"></i> {{item.id}} - {{item.label}}</span>
-                </div>
-                <div class="flex" *ngIf="item.type == 'CARDS'">
-                    <div *ngIf="item.urlImage"><img src="{{assetBaseUrl}}{{item.urlImage}}" width="125px" /></div>
-                    <div *ngIf="!item.urlImage"><img src="{{assetBaseUrl}}assets/static/images/cards/unknown.webp" width="125px" /></div>
-                    <div class="flex align-items-center justify-content-between pl-5">
-                        <div class="mr-3">
-                            <p-button icon="pi pi-plus" styleClass="p-button-sm p-button-outlined p-button-rounded p-button-success" (onClick)="add(item)"></p-button>
+<div class="grid">
+    <div class="col-11">
+        <span class="p-fluid">
+            <p-autoComplete placeholder="Rechercher une carte ou un set pour un ajout rapide"
+                [suggestions]="searchResultItems" (completeMethod)="search($event)" field="label"
+                (onSelect)="onSelect($event)" [(ngModel)]="selectedResult" [panelStyle]="{'min-height': '500px'}">
+                <ng-template let-item pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <div *ngIf="item.type == 'SETS'" class="flex align-items-center">
+                            <div class="mr-3">
+                                <p-button icon="pi pi-plus"
+                                    styleClass="p-button-sm p-button-outlined p-button-rounded p-button-success"
+                                    (onClick)="add(item)"></p-button>
+                            </div>
+                            <span><i class="ss ss-{{item.keyruneCode.toLowerCase()}}"></i> {{item.id}} -
+                                {{item.label}}</span>
                         </div>
-                        <div>
-                            <span>{{item.label}}</span>
+                        <div class="flex" *ngIf="item.type == 'CARDS'">
+                            <div *ngIf="item.urlImage"><img src="{{assetBaseUrl}}{{item.urlImage}}" width="125px" />
+                            </div>
+                            <div *ngIf="!item.urlImage"><img
+                                    src="{{assetBaseUrl}}assets/static/images/cards/unknown.webp" width="125px" /></div>
+                            <div class="flex align-items-center justify-content-between pl-5">
+                                <div class="mr-3">
+                                    <p-button icon="pi pi-plus"
+                                        styleClass="p-button-sm p-button-outlined p-button-rounded p-button-success"
+                                        (onClick)="add(item)"></p-button>
+                                </div>
+                                <div>
+                                    <span>{{item.label}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </ng-template>
-    </p-autoComplete>
-</span>
+                </ng-template>
+            </p-autoComplete>
+        </span>
+    </div>
+    <div class="col-1 flex align-items-center">
+        <a routerLink="add-by-file"><i class="pi pi-file-import text-5xl"></i></a>
+    </div>
+</div>

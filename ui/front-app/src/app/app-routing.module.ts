@@ -7,6 +7,8 @@ import { SetsContentComponent } from './sets-content/sets-content.component';
 import { NoSetSelectedComponent } from './no-set-selected/no-set-selected.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { RechercheAvanceeComponent } from './recherche-avancee/recherche-avancee.component';
+import { AddByCaptureComponent } from './add-by-capture/add-by-capture.component';
+import { AddByFileComponent } from './add-by-file/add-by-file.component';
 
 const routes: Routes = [
   { path: 'mcm', component: HomeComponent },
@@ -15,7 +17,8 @@ const routes: Routes = [
     children: [
       { path: '', component: NoSetSelectedComponent},
       { path: 'sets/:code', component: SetsContentComponent },
-      { path: 'recherche-avancee', component: RechercheAvanceeComponent }
+      { path: 'recherche-avancee', component: RechercheAvanceeComponent },
+      { path: 'add-by-file', component: AddByFileComponent }
     ] 
   },
   { path: '', redirectTo: '/mcm', pathMatch: 'full' },

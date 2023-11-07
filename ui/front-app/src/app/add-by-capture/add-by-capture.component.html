@@ -1,0 +1,18 @@
+<div class="text-center">
+    <p>
+        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+    </p>
+    <p>
+        <button class="p-button" (click)="triggerSnapshot()">Détection</button>
+    </p>
+</div>
+
+<div class="snapshot" *ngIf="webcamImage">
+    <h2>Nice one!</h2>
+    <img [src]="webcamImage.imageAsDataUrl"/>
+</div>
+
+<div>
+    <h2>Liste des cartes détectées/ajoutées</h2>
+    TODO
+</div>

@@ -1,0 +1,18 @@
+<h2>Import de cartes par fichier</h2>
+<p>L'import peut être fait directement par fichier au format csv (séparateur 'virgule') en ayant les champs suivants :</p>
+<ol>
+    <li>Nom de la carte,</li>
+    <li>Numéro de la carte,</li>
+    <li>Condition de la carte,</li>
+    <li>Code du set de la carte,</li>
+    <li>Si la carte est foil ou non (mettre "Foil" dans la colonne si la carte l'est)</li>
+</ol>
+
+<div>
+    <p>
+        <input type="file" (change)="selectFiles($event)" accept=".csv">
+    </p>
+    <p>
+        <p-button [disabled]="!selectedFile" (onClick)="upload()">Téléverser</p-button>
+    </p>
+</div>

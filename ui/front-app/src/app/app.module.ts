@@ -38,6 +38,9 @@ import { SetsContentGridComponent } from './sets-content-grid/sets-content-grid.
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { SetsContentListComponent } from './sets-content-list/sets-content-list.component';
 import { RechercheAvanceeComponent } from './recherche-avancee/recherche-avancee.component';
+import { AddByCaptureComponent } from './add-by-capture/add-by-capture.component';
+import { WebcamModule } from 'ngx-webcam';
+import { AddByFileComponent } from './add-by-file/add-by-file.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,9 @@ import { RechercheAvanceeComponent } from './recherche-avancee/recherche-avancee
     SetsContentGridComponent,
     CardDetailsComponent,
     SetsContentListComponent,
-    RechercheAvanceeComponent
+    RechercheAvanceeComponent,
+    AddByCaptureComponent,
+    AddByFileComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -74,7 +79,8 @@ import { RechercheAvanceeComponent } from './recherche-avancee/recherche-avancee
     SelectButtonModule,
     CardModule,
     ProgressBarModule,
-    DialogModule
+    DialogModule,
+    WebcamModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
