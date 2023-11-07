@@ -16,6 +16,26 @@ public enum ConditionEnum {
 	
 	NM,
 	
-	M
+	M;
+	
+	public static ConditionEnum getEquivalent(String condition) {
+		if ("Near Mint".equals(condition)) {
+			return NM;
+		}
+		
+		if ("Slightly Played".equals(condition)) {
+			return LP;
+		}
+		
+		if ("Moderately Played".equals(condition)) {
+			return PL;
+		}
+		
+		if ("Heavily Played".equals(condition)) {
+			return POOR;
+		}
+		
+		return UNKNOWN;
+	}
 
 }

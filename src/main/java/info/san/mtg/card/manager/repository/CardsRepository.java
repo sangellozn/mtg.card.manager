@@ -2,6 +2,7 @@ package info.san.mtg.card.manager.repository;
 
 import java.time.Instant;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,5 +53,7 @@ public interface CardsRepository extends JpaRepository<Cards, String> {
 			)
 			""")
 	Collection<Cards> findAllForPriceUpdate(@Param("updatedBefore") Instant updatedBefore);
+	
+	Optional<Cards> findBySetCodeAndNumber(String setCode, String number);
 	
 }

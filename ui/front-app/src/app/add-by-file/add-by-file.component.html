@@ -9,10 +9,63 @@
 </ol>
 
 <div>
-    <p>
-        <input type="file" (change)="selectFiles($event)" accept=".csv">
-    </p>
-    <p>
-        <p-button [disabled]="!selectedFile" (onClick)="upload()">Téléverser</p-button>
-    </p>
+    <form>
+        <p>
+            <input type="file" (change)="selectFiles($event)" name="selectedFile" accept=".csv">
+        </p>
+        <p>
+            <p-button [disabled]="!selectedFile" (onClick)="upload()" size="small">Téléverser</p-button>
+        </p>
+    </form>
+</div>
+
+<div *ngIf="itemsImported.length">
+    <h2>Résultat de l'import</h2>
+
+    <p-table [value]="itemsImported" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="400px">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Illustation</th>
+                <th>Numéro</th>
+                <th>Nom</th>
+                <th>Set</th>
+                <th>
+                    <div class="card flex justify-content-center flex-column align-items-center">
+                        <span class="mb-2">Condition</span>
+                        <p-dropdown [options]="conditions" placeholder="Appliquer aux vides" (onChange)="applyToEmpty($event)"></p-dropdown>
+                    </div>
+                </th>
+                <th>Foil</th>
+                <th>Supprimer</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td class="text-center">
+                    <img *ngIf="item.found" src="{{assetBaseUrl}}{{item.cardImagePath}}" alt="{{item.cardName}}" title="{{item.cardName}}" width="50px">
+                    <span *ngIf="!item.found">N/A</span>
+                </td>
+                <td class="text-center">{{ item.cardNumber }}</td>
+                <td>{{ item.cardName }}</td>
+                <td *ngIf="item.found"><i class="ss ss-{{item.setCode.toLowerCase()}}" title="{{item.setCode}}"></i>&nbsp;{{ item.setCode }} - {{ item.setName }}</td>
+                <td *ngIf="!item.found">N/A</td>
+                <td class="text-center">
+                    <div class="card flex justify-content-center">
+                        <p-dropdown [options]="conditions" [showClear]="true" [(ngModel)]="item.condition" placeholder="Choisir l'état"></p-dropdown>
+                    </div>
+                </td>
+                <td><i *ngIf="item.foil" class="pi pi-check"></i></td>
+                <td class="text-center">
+                    <p-button icon="pi pi-times" styleClass="p-button-sm p-button-outlined p-button-rounded p-button-danger" (onClick)="remove(item)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Il y a un total de {{itemsImported ? itemsImported.length : 0 }} cartes.
+            </div>
+        </ng-template>
+    </p-table>
+
+    <p-button [disabled]="!itemsImported.length" size="small" styleClass="mt-3" (onClick)="addCards()">Ajouter les cartes</p-button>
 </div>

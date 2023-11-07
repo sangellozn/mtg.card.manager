@@ -1,6 +1,7 @@
 <p-table [value]="userSet.cards" dataKey="uuid"
     #cardsTable
-    [globalFilterFields]="['cardForeignData.name', 'cardForeignData.type', 'name', 'type']">
+    [globalFilterFields]="['cardForeignData.name', 'cardForeignData.type', 'name', 'type']"
+    styleClass="p-datatable-striped">
     <ng-template pTemplate="caption">
         <div class="flex">
             <button pButton label="Effacer le filtre" class="p-button-outlined" icon="pi pi-filter-slash" (click)="cardsTable.clear()"></button>
@@ -55,7 +56,7 @@
                     <div class="flex col-2 align-items-center">
                         <div>
                             <img src="{{assetBaseUrl}}{{card.cardImagery.urlSmall}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" (click)="showCardDetail(card)" />
-                            <p class="text-center">{{card.cardPrice.valEur || 'N/A'}} € / {{card.cardPrice.valEurFoil || 'N/A'}} €</p>
+                            <p class="text-center">{{card.cardPrice?.valEur || 'N/A'}} € / {{card.cardPrice?.valEurFoil || 'N/A'}} €</p>
                         </div>
                     </div>
                     <div class="col-10">

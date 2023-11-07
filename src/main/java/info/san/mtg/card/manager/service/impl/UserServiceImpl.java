@@ -184,13 +184,15 @@ public class UserServiceImpl implements IUserService {
 		user.getSets().add(card.getSet());
 		card.getSet().getUsers().add(user);
 		
-		UserCard userCard = userCardRepository.findOneByUserUuidAndCardUuidAndConditionAndType(userUuid, addCardDto.getCardUuid(), ConditionEnum.M.name(), CardTypeEnum.NORMAL.name())
+		UserCard userCard = userCardRepository.findOneByUserUuidAndCardUuidAndConditionAndType(userUuid, addCardDto.getCardUuid(),
+						addCardDto.getCondition() != null ? addCardDto.getCondition().name() : ConditionEnum.M.name(), 
+						addCardDto.getType() != null ? addCardDto.getType().name() : CardTypeEnum.NORMAL.name())
 				.orElseGet(UserCard::new);
 		
 		userCard.setCard(card);
 		userCard.setCondition(addCardDto.getCondition().name());
 		userCard.setType(addCardDto.getType().name());
-		userCard.setQte(addCardDto.getQte());
+		userCard.setQte(userCard.getQte() + addCardDto.getQte());
 		userCard.setUser(user);
 
 		setsRepository.save(card.getSet());

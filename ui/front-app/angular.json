@@ -31,7 +31,9 @@
               "src/assets/static/images/keyrune",
               "src/assets/static/images/symboles",
               "src/assets/static/images/cards/normal/3/8",
-              "src/assets/static/images/cards/small/3/8"
+              "src/assets/static/images/cards/small/3/8",
+              "src/assets/static/images/cards/normal/3/c",
+              "src/assets/static/images/cards/small/3/c"
             ],
             "styles": [
               "src/styles.scss",

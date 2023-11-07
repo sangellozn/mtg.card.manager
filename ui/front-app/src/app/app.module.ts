@@ -24,6 +24,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
@@ -80,7 +81,8 @@ import { AddByFileComponent } from './add-by-file/add-by-file.component';
     CardModule,
     ProgressBarModule,
     DialogModule,
-    WebcamModule
+    WebcamModule,
+    DropdownModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
