@@ -7,7 +7,7 @@
             <p class="m-0">
                 <img src="{{assetBaseUrl}}{{card.cardImagery.urlNormal}}" alt="{{getCardName(card)}}" title="{{getCardName(card)}}" width="225px" 
                     loading="lazy" (click)="showCardDetail(card)"/>
-                <span>{{card.cardPrice.valEur || 'N/A'}} € / {{card.cardPrice.valEurFoil || 'N/A'}} €</span>
+                <span>{{card.cardPrice?.valEur || 'N/A'}} € / {{card.cardPrice?.valEurFoil || 'N/A'}} €</span>
             </p>
             <ng-template pTemplate="footer">
                 <ng-template ngFor let-possession let-size="count" [ngForOf]="getCardPossessions(card)">
