@@ -14,10 +14,10 @@
                 <a href="{{card.cardPurchaseUrls.cardmarket}}" target="_blank">Lien vers CardMarket</a>
             </p>
             <h3>Derniers prix</h3>
-            <p *ngIf="card.cardPrice?.valEur"><b>Normal : </b>{{card.cardPrice.valEur}} €</p>
-            <p *ngIf="!card.cardPrice?.valEur && card.cardPrice?.valUsd"><b>Normal : </b>{{card.cardPrice.valUsd}} $</p>
-            <p *ngIf="card.cardPrice?.valEurFoil"><b>Foil : </b>{{card.cardPrice.valEurFoil}} €</p>
-            <p *ngIf="!card.cardPrice?.valEurFoil && card.cardPrice?.valUsdFoil"><b>Foil : </b>{{card.cardPrice.valUsdFoil}} $</p>
+            <p *ngIf="card.cardPrice?.valEur"><b>Normal : </b>{{card.cardPrice?.valEur}} €</p>
+            <p *ngIf="!card.cardPrice?.valEur && card.cardPrice?.valUsd"><b>Normal : </b>{{card.cardPrice?.valUsd}} $</p>
+            <p *ngIf="card.cardPrice?.valEurFoil"><b>Foil : </b>{{card.cardPrice?.valEurFoil}} €</p>
+            <p *ngIf="!card.cardPrice?.valEurFoil && card.cardPrice?.valUsdFoil"><b>Foil : </b>{{card.cardPrice?.valUsdFoil}} $</p>
         </div>
     </div>
 </p-dialog>

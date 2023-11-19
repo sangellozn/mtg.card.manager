@@ -21,6 +21,10 @@ export class AddByFileComponent implements OnInit {
 
   userUuid: string = '';
 
+  loadingUpload: boolean = false;
+
+  loadingAddCard: boolean = false;
+
   conditions: any[] = [
     {label: 'Mint', value: 'M'},
     {label: 'Near Mint', value: 'NM'},
@@ -54,9 +58,11 @@ export class AddByFileComponent implements OnInit {
   }
 
   upload(): void {
+    this.loadingUpload = true;
     this.csvImportService.importCsv(this.selectedFile).subscribe(data => {
       this.itemsImported = this.itemsImported.concat(data.items);
       this.selectedFile = undefined;
+      this.loadingUpload = false;
     });
   }
 
@@ -65,10 +71,16 @@ export class AddByFileComponent implements OnInit {
   }
 
   addCards() {
+    this.loadingAddCard = true;
     this.csvImportService.addCards(this.userUuid, this.itemsImported).subscribe(() => {
       this.itemsImported = [];
       this.notifyAddService.notifyAdd(new SearchResultItem);
+      this.loadingAddCard = false;
     });
+  }
+
+  getNotFoundCardsCount() {
+    return this.itemsImported.filter(item => !item.found).length;
   }
 
 }

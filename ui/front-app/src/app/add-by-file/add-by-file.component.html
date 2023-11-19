@@ -14,7 +14,7 @@
             <input type="file" (change)="selectFiles($event)" name="selectedFile" accept=".csv">
         </p>
         <p>
-            <p-button [disabled]="!selectedFile" (onClick)="upload()" size="small">Téléverser</p-button>
+            <p-button [disabled]="!selectedFile" [loading]="loadingUpload" (onClick)="upload()">Téléverser</p-button>
         </p>
     </form>
 </div>
@@ -22,13 +22,13 @@
 <div *ngIf="itemsImported.length">
     <h2>Résultat de l'import</h2>
 
-    <p-table [value]="itemsImported" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="400px">
+    <p-table [value]="itemsImported" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="675px">
         <ng-template pTemplate="header">
             <tr>
                 <th>Illustation</th>
-                <th>Numéro</th>
-                <th>Nom</th>
-                <th>Set</th>
+                <th pSortableColumn="cardNumber">Numéro <p-sortIcon field="cardNumber"></p-sortIcon></th>
+                <th pSortableColumn="cardName">Nom <p-sortIcon field="cardName"></p-sortIcon></th>
+                <th pSortableColumn="setCode">Set <p-sortIcon field="setCode"></p-sortIcon></th>
                 <th>
                     <div class="card flex justify-content-center flex-column align-items-center">
                         <span class="mb-2">Condition</span>
@@ -40,7 +40,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-item>
-            <tr>
+            <tr class="{{!item.found ? 'not-found' : ''}}">
                 <td class="text-center">
                     <img *ngIf="item.found" src="{{assetBaseUrl}}{{item.cardImagePath}}" alt="{{item.cardName}}" title="{{item.cardName}}" width="50px">
                     <span *ngIf="!item.found">N/A</span>
@@ -54,7 +54,7 @@
                         <p-dropdown [options]="conditions" [showClear]="true" [(ngModel)]="item.condition" placeholder="Choisir l'état"></p-dropdown>
                     </div>
                 </td>
-                <td><i *ngIf="item.foil" class="pi pi-check"></i></td>
+                <td><p-inputSwitch [(ngModel)]="item.foil" [disabled]="!item.found"></p-inputSwitch></td>
                 <td class="text-center">
                     <p-button icon="pi pi-times" styleClass="p-button-sm p-button-outlined p-button-rounded p-button-danger" (onClick)="remove(item)"></p-button>
                 </td>
@@ -62,10 +62,11 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="flex align-items-center justify-content-between">
-                Il y a un total de {{itemsImported ? itemsImported.length : 0 }} cartes.
+                <span>Il y a un total de {{itemsImported ? itemsImported.length : 0 }} carte(s).</span>
+                <span>Il y a un total de {{getNotFoundCardsCount()}} carte(s) non trouvée(s).</span>
             </div>
         </ng-template>
     </p-table>
 
-    <p-button [disabled]="!itemsImported.length" size="small" styleClass="mt-3" (onClick)="addCards()">Ajouter les cartes</p-button>
+    <p-button [disabled]="!itemsImported.length" [loading]="loadingAddCard" size="small" styleClass="mt-3" (onClick)="addCards()">Ajouter les cartes</p-button>
 </div>

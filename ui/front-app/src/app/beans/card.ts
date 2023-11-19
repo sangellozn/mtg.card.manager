@@ -30,7 +30,7 @@ export class Card {
     possessions : UserCard[];
     cardForeignData: CardForeignData = new CardForeignData;
     cardImagery: CardImagery = new CardImagery;
-    cardPrice: CardPrices = new CardPrices;
+    cardPrice?: CardPrices = new CardPrices;
     cardPurchaseUrls: CardUrls = new CardUrls;
 
 }

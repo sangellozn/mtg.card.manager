@@ -33,7 +33,7 @@ public class Application extends SpringBootServletInitializer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:4200", "http://kirjava:8080")
+                		.allowedOriginPatterns("*")
                         .allowedMethods("HEAD", "GET", "POST", "PUT", "OPTIONS");
             }
 

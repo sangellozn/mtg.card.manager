@@ -9,6 +9,8 @@
                 </ng-template>
             </p-selectButton>
         </div>
+        <p>Valeur total de la collection : {{userSet.totalValueEur}} € pour un total de {{userSet.cardsCount}} carte(s) dont {{userSet.cardsUniqueCount}} unique(s).</p>
+        <p *ngIf="userSet.mostExpensiveCard">Carte ayant le plus de valeur : {{getCardName(userSet.mostExpensiveCard)}} pour une valeur de {{userSet.mostExpensiveCard.cardPrice?.valEur || 'N/A'}} € / {{userSet.mostExpensiveCard.cardPrice?.valEurFoil || 'N/A'}} €</p>
         <div class="grid">
             <div class="col-12 mb-2">
                 <p-progressBar [value]="getProgressValue()"></p-progressBar>

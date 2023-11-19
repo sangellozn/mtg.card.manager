@@ -78,4 +78,10 @@ export class SetsContentListComponent implements OnInit {
     return label;
   }
 
+  getCardPossessedCount(card: Card): number {
+    return card.possessions.reduce((acc, item) => {
+      return acc + item.qteEX + item.qteGD + item.qteLP + item.qteM + item.qteNM + item.qtePL + item.qtePoor
+    }, 0);
+  }
+
 }

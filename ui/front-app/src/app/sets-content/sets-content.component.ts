@@ -67,5 +67,17 @@ export class SetsContentComponent implements OnInit {
     
     return val.toFixed(2);
   }
+
+  getCardName(card?: Card): string {
+    if (card) {
+      if (card.cardForeignData?.name) {
+        return card.cardForeignData.name;
+      }
+  
+      return card.name;
+    }
+    
+    return 'N/A';
+  }
   
 }
